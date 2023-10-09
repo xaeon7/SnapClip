@@ -50,7 +50,7 @@ export default function Clipboard({
           {clip?.content ? (
             <Tooltip content={`Copy the content`}>
               <button
-                onClick={() => void copyToClipboard(code)}
+                onClick={() => void copyToClipboard(clip.content)}
                 className="rounded-md border border-neutral-600 p-2 text-neutral-200 duration-200 hover:bg-neutral-600 hover:bg-opacity-60"
               >
                 <CopyIcon />
