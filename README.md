@@ -2,7 +2,7 @@
 
 Welcome to SnapClip, the ultimate online clipboard application designed to simplify your copy-paste tasks.
 
-![SnapClip Logo]()
+![SnapClip Logo](https://snapclip.vercel.app/_next/static/media/thumbnail.bdeccd53.jpg)
 
 ## Overview
 
