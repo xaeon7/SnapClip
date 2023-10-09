@@ -68,7 +68,7 @@ export default function ClipboardEditor({
           settings: {
             background: "#141324",
             lineHighlight: "#26234760",
-            fontFamily: "Hack NFM",
+            fontFamily: "Hack NFM, consolas, monospace",
             gutterBackground: "#141324",
             gutterActiveForeground: "#A4A1C8",
             gutterForeground: "#262347",
