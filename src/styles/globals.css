@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+
+:root {
+  color-scheme: dark;
+  font-family: "Inter", sans-serif;
+}
+
+/* For Chrome, Safari, and Opera */
+*::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f100; /* Color of the track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #262347; /* Color of the thumb */
+  border-radius: 4px; /* Rounded corners of the thumb */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #383463; /* Color of the thumb on hover */
+}
+
+html,
+body,
+#__next {
+  @apply h-full w-full bg-neutral-900 text-neutral-100;
+}
+
+body {
+  overflow: hidden;
+}
+
+.cm-editor {
+  outline: none !important;
+}
+.cm-editor.cm-focused {
+  outline: none !important;
+}
