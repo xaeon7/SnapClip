@@ -37,6 +37,7 @@ export default function Home() {
       enabled: currClipboardType === "Retrieve" && !!id,
       onSuccess(data) {
         if (!data?.content) newToast(`Clipboard not found`, "error");
+        ref.current?.forEach((input) => input.blur());
       },
     },
   );
