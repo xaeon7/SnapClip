@@ -5,6 +5,7 @@ import type { Clip, ClipboardType } from "@/pages";
 import Tooltip from "./ui/Tooltip";
 import copyToClipboard from "@/utils/copyToClipboard";
 import CopyIcon from "./icons/CopyIcon";
+import { Checkbox } from "./ui/Checkbox";
 
 interface ClipboardProps {
   id: string;
@@ -16,6 +17,8 @@ interface ClipboardProps {
   code: string;
   setCode: React.Dispatch<React.SetStateAction<string>>;
   clip?: Clip | null;
+  autoErase: boolean;
+  setAutoErase: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function Clipboard({
@@ -28,6 +31,8 @@ export default function Clipboard({
   code,
   setCode,
   clip,
+  autoErase,
+  setAutoErase,
 }: ClipboardProps) {
   // const CurrComponent = ClipboardComponent[currClipboardType];
 
@@ -65,18 +70,44 @@ export default function Clipboard({
 
       {/* Content */}
       <ClipboardEditor
-        code={
-          currClipboardType === "Share"
-            ? code
-            : clip?.content ?? "There is nothing here, insert a valid id!"
-        }
+        code={currClipboardType === "Share" ? code : clip?.content ?? ""}
         setCode={setCode}
         language={
           currClipboardType === "Share" ? language : clip?.language ?? "-"
         }
         setLanguage={setLanguage}
         editable={currClipboardType === "Share"}
+        placeholder={
+          currClipboardType === "Share"
+            ? "Type or paste text here..."
+            : "There is nothing here, insert a valid id!"
+        }
       />
+
+      {currClipboardType === "Share" ? (
+        <div className="flex items-center gap-2">
+          <Checkbox
+            checked={autoErase}
+            onCheckedChange={(e) => setAutoErase(!!e)}
+            id="autoErase"
+          />
+          <label
+            htmlFor="autoErase"
+            className="cursor-pointer select-none text-sm text-neutral-400"
+          >
+            Erase the clipboard contents automatically after viewing them once.
+          </label>
+        </div>
+      ) : null}
+
+      {clip?.autoEraseOnce ? (
+        <div className="bg-warning/20 border-warning text-warning w-fit rounded-lg border p-2 text-xs  ">
+          ⚠️ Warning:{" "}
+          <span className="font-medium">
+            This clipboard will be automatically erased
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 }

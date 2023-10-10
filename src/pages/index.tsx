@@ -26,23 +26,30 @@ export default function Home() {
   const [currClipboardType, setCurrClipboardType] =
     React.useState<ClipboardType>("Share");
 
-  const [code, setCode] = React.useState("Type or paste text here...");
+  const [code, setCode] = React.useState("");
   const [language, setLanguage] = React.useState("markdown");
+  const [autoErase, setAutoErase] = React.useState(false);
 
   const ref = React.useRef<HTMLInputElement[]>(null);
 
+  const deleteClip = api.clipboard.delete.useMutation({});
   const { data: clip } = api.clipboard.getById.useQuery(
     { id },
     {
       enabled: currClipboardType === "Retrieve" && !!id,
-      onSuccess(data) {
-        if (!data?.content) newToast(`Clipboard not found`, "error");
+      refetchOnWindowFocus: false,
+      cacheTime: 0,
+      onSuccess: (data) => {
+        if (!data?.content || !data) newToast(`Clipboard not found`, "error");
+        if (data?.autoEraseOnce) deleteClip.mutate({ id: data.id });
         ref.current?.forEach((input) => input.blur());
       },
     },
   );
   const shareClip = api.clipboard.create.useMutation({
-    onSuccess: (_) => {
+    onSuccess: (data) => {
+      setID(data.id);
+      ref.current?.forEach((input, idx) => (input.value = data.id[idx] ?? ""));
       newToast(`Clipboard (ID: ${id}) is shared successfully`, "success");
     },
   });
@@ -65,11 +72,8 @@ export default function Home() {
       id: currID,
       content: code,
       language,
-      autoEraseOnce: false,
+      autoEraseOnce: autoErase,
     });
-
-    setID(currID);
-    ref.current?.forEach((input, idx) => (input.value = currID[idx] ?? ""));
   }
 
   // function getClip() {
@@ -151,6 +155,8 @@ export default function Home() {
               code,
               setCode,
               clip,
+              autoErase,
+              setAutoErase,
             }}
           />
         </div>

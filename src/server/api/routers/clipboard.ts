@@ -37,4 +37,17 @@ export const clipboardRouter = createTRPCRouter({
         create: { ...input },
       });
     }),
+  delete: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.db.clipboard.delete({
+        where: {
+          id: input.id,
+        },
+      });
+    }),
 });

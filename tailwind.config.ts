@@ -5,6 +5,7 @@ export default {
   theme: {
     colors: {
       danger: { DEFAULT: "#fe4b4b" },
+      warning: { DEFAULT: "#ffb01e" },
       transparent: "transparent",
       main: { DEFAULT: "#24A1FC" },
       neutral: {

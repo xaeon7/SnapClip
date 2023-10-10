@@ -23,6 +23,7 @@ interface ClipboardProps {
   language: string;
   setLanguage: React.Dispatch<React.SetStateAction<string>>;
   editable: boolean;
+  placeholder: string;
 }
 
 export default function ClipboardEditor({
@@ -30,6 +31,7 @@ export default function ClipboardEditor({
   editable,
   setCode,
   setLanguage,
+  placeholder,
 }: ClipboardProps) {
   const [languageExtension, setLanguageExtension] =
     React.useState(markdownExtension);
@@ -86,6 +88,7 @@ export default function ClipboardEditor({
             : [EditorView.lineWrapping]
         }
         className=""
+        placeholder={placeholder}
         autoFocus={true}
         editable={editable}
       />

@@ -48,3 +48,6 @@ body {
 .cm-editor.cm-focused {
   outline: none !important;
 }
+.cm-placeholder {
+  color: #7773af !important;
+}
