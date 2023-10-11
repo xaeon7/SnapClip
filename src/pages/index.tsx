@@ -50,7 +50,7 @@ export default function Home() {
     onSuccess: (data) => {
       setID(data.id);
       ref.current?.forEach((input, idx) => (input.value = data.id[idx] ?? ""));
-      newToast(`Clipboard (ID: ${id}) is shared successfully`, "success");
+      newToast(`Clipboard (ID: ${data.id}) is shared successfully`, "success");
     },
   });
 
